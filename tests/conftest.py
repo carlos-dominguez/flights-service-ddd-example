@@ -3,13 +3,10 @@ from redis import Redis
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from flights_service.adapters.abc import SearchAdapter
 from flights_service.adapters.test import TestSearchAdapter
 from flights_service.db_mapper import mapper_registry
-from flights_service.repositories.airline.abc import AirlineRepository
 from flights_service.repositories.airline.sqlalchemy import SQLAlchemyAirlineRepository
 from flights_service.repositories.quote.sqlalchemy import QuoteRepository
-from flights_service.repositories.search_session.abc import SearchSessionRepository
 from flights_service.repositories.search_session.redis import (
     RedisSearchSessionRepository,
 )

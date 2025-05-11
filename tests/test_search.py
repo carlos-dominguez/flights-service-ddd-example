@@ -17,7 +17,7 @@ def test_search(search_service, search_session_repo, quote_repo):
     - We turn an offer into a quote in the most obvious way possible, using physically-same Slice objects.
     - We show that quotes can be saved and loaded via SQLAlchemy session.
 
-    To run this test, start the `postgres` and `redis` services in docker-compose.yaml.
+    Before running this test, start the `postgres` and `redis` services in docker-compose.yaml.
     """
 
     search_session = search_service.do_search()
