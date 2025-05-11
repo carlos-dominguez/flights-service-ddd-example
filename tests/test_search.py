@@ -15,7 +15,7 @@ def test_search(search_service, search_session_repo, quote_repo):
     - We perform a search and show that the entire session can be saved to/loaded from Redis.
     - We show that offers are *not* tracked by SQLAlchemy.
     - We turn an offer into a quote in the most obvious way possible, using physically-same Slice objects.
-    - We show that quotes can be saved and loaded via SQLAlchemy session.
+    - We show that quotes can be saved and loaded via the SQLAlchemy session.
 
     Before running this test, start the `postgres` and `redis` services in docker-compose.yaml.
     """
