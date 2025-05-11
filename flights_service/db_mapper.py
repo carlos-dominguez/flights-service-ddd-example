@@ -2,7 +2,6 @@ from sqlalchemy import Table, Column, Text, DateTime, Integer, ForeignKey, Numer
 from sqlalchemy.orm import registry, relationship
 
 from flights_service.models.airline import Airline
-from flights_service.models.airport import Airport
 from flights_service.models.quote import Quote
 from flights_service.models.segment import Segment
 from flights_service.models.slice import Slice
@@ -11,13 +10,6 @@ mapper_registry = registry()
 
 airline_table = Table(
     "airline",
-    mapper_registry.metadata,
-    Column("iata_code", Text, primary_key=True),
-    Column("name", Text, nullable=False),
-)
-
-airport_table = Table(
-    "airport",
     mapper_registry.metadata,
     Column("iata_code", Text, primary_key=True),
     Column("name", Text, nullable=False),
@@ -71,7 +63,6 @@ slice_quote_association = Table(
 
 
 mapper_registry.map_imperatively(Airline, airline_table)
-mapper_registry.map_imperatively(Airport, airport_table)
 mapper_registry.map_imperatively(
     Segment,
     segment_table,
