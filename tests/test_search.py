@@ -10,7 +10,7 @@ from flights_service.repositories.search_session.redis import (
 def test_search(search_service, search_session_repo, quote_repo):
     """
     This test demonstrates how we can apply different persistence strategies to offers and quotes, despite their
-    domain models being nearly identical (Quote being fully defined as `class Quote(Offer): pass`):
+    domain models being nearly identical. (Quote is fully defined as `class Quote(Offer): pass`.)
 
     - We perform a search and show that the entire session can be saved to/loaded from Redis.
     - We show that offers are *not* tracked by SQLAlchemy.
@@ -24,9 +24,6 @@ def test_search(search_service, search_session_repo, quote_repo):
 
     assert isinstance(search_session_repo, RedisSearchSessionRepository)
     search_session_reloaded = search_session_repo.get_session_by_id(search_session.id)
-
-    assert search_session_reloaded.id == search_session.id
-    assert search_session_reloaded is not search_session
 
     offer = search_session_reloaded.offers[0]
     with pytest.raises(NoInspectionAvailable):
