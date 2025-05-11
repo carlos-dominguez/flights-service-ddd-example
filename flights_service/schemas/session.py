@@ -22,11 +22,6 @@ class SegmentSchema(BaseModel):
     departure_time: datetime
     arrival_time: datetime
 
-    @property
-    def airline_iata_codes(self) -> Iterable[str]:
-        yield self.marketing_airline_iata_code
-        yield self.operating_airline_iata_code
-
     def to_domain(self, airline_repo: AirlineRepository) -> Segment:
         return Segment(
             marketing_airline=airline_repo.get_airline_by_iata_code(
@@ -45,11 +40,6 @@ class SliceSchema(BaseModel):
     segments: list[SegmentSchema]
     fare_brand_name: str
 
-    @property
-    def airline_iata_codes(self) -> Iterable[str]:
-        for segment in self.segments:
-            yield from segment.airline_iata_codes
-
     def to_domain(self, airline_repo: AirlineRepository) -> Slice:
         return Slice(
             segments=[seg.to_domain(airline_repo) for seg in self.segments],
@@ -63,11 +53,6 @@ class OfferSchema(BaseModel):
     slices: list[SliceSchema]
     currency: Currency
     total_amount: Decimal
-
-    @property
-    def airline_iata_codes(self) -> Iterable[str]:
-        for slice in self.slices:
-            yield from slice.airline_iata_codes
 
     def to_domain(self, airline_repo: AirlineRepository) -> Offer:
         return Offer(
